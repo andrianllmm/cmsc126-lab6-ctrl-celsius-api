@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import type { PokemonDetail } from "@/types/pokemon";
+import type { PokemonColor, PokemonDetail } from "@/types/pokemon";
 import { getPokemonColor } from "@/services/pokemon";
 
 export function usePokemonColors(pokemons: PokemonDetail[]) {
-  const [colors, setColors] = useState<Record<string, string>>({});
+  const [colors, setColors] = useState<
+    Record<PokemonDetail["name"], PokemonColor>
+  >({});
 
   useEffect(() => {
     if (!pokemons.length) return;
@@ -16,7 +18,7 @@ export function usePokemonColors(pokemons: PokemonDetail[]) {
         }),
       );
 
-      setColors(Object.fromEntries(entries));
+      setColors(Object.fromEntries(entries) as Record<string, PokemonColor>);
     };
 
     fetchColors();
