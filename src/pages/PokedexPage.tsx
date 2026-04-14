@@ -1,3 +1,4 @@
+import PokemonList from "@/components/pokemon/PokemonList";
 import { usePokemonList } from "@/hooks/usePokemonList";
 
 const PokedexPage = () => {
@@ -12,13 +13,9 @@ const PokedexPage = () => {
   }
 
   return (
-    <div>
-      {data.results.map((pokemon) => (
-        <div key={pokemon.name}>
-          <p>{pokemon.name}</p>
-        </div>
-      ))}
-    </div>
+    <>
+      <PokemonList pokemon={data} />
+    </>
   );
 };
 
