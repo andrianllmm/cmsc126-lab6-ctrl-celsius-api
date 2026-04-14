@@ -1,8 +1,9 @@
 import { getPokemon } from "@/services/pokemon";
+import type { PokemonDetail } from "@/types/pokemon";
 import { useEffect, useState } from "react";
 
 export function usePokemon(name: string) {
-  const [data, setData] = useState<unknown>(null);
+  const [data, setData] = useState<PokemonDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

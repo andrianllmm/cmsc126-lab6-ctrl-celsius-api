@@ -6,15 +6,19 @@ const PokemonPage = () => {
 
   const { data, loading, error } = usePokemon(name || "");
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
     return <div>Error: {error}</div>;
   }
 
-  return <div>{JSON.stringify(data)}</div>;
+  if (loading || !data) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <p>{data.name}</p>
+    </div>
+  );
 };
 
 export default PokemonPage;

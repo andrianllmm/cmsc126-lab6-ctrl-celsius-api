@@ -1,8 +1,9 @@
 import { getPokemonList } from "@/services/pokemon";
+import type { PokemonListResponse } from "@/types/pokemon";
 import { useEffect, useState } from "react";
 
 export function usePokemonList() {
-  const [data, setData] = useState<unknown>(null);
+  const [data, setData] = useState<PokemonListResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

@@ -3,15 +3,23 @@ import { usePokemonList } from "@/hooks/usePokemonList";
 const PokedexPage = () => {
   const { data, loading, error } = usePokemonList();
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
     return <div>Error: {error}</div>;
   }
 
-  return <div>{JSON.stringify(data)}</div>;
+  if (loading || !data) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      {data.results.map((pokemon) => (
+        <div key={pokemon.name}>
+          <p>{pokemon.name}</p>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default PokedexPage;
