@@ -4,7 +4,7 @@ export type EvolutionNode = {
 };
 
 export const getEvolutionChain = (
-  chain: EvolutionNode,
+  chain: EvolutionNode
 ): { name: string; url: string }[] => {
   const result: { name: string; url: string }[] = [];
 

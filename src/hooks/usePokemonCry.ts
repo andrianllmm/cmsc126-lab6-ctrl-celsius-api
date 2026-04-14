@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from 'react';
 
 export function usePokemonCry(cryUrl?: string) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -13,22 +13,22 @@ export function usePokemonCry(cryUrl?: string) {
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
 
-    audio.addEventListener("play", handlePlay);
-    audio.addEventListener("pause", handlePause);
-    audio.addEventListener("ended", handlePause);
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('ended', handlePause);
 
     // Trigger the side effect
     audio.currentTime = 0;
     audio.play().catch((err) => {
       // Browsers often block autoplay until a user interaction occurs
-      console.warn("Autoplay blocked or interrupted:", err);
+      console.warn('Autoplay blocked or interrupted:', err);
     });
 
     // Cleanup subscriptions
     return () => {
-      audio.removeEventListener("play", handlePlay);
-      audio.removeEventListener("pause", handlePause);
-      audio.removeEventListener("ended", handlePause);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('ended', handlePause);
     };
   }, [cryUrl]);
 

@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
-import { getPokemon, getPokemonList } from "@/services/pokemon";
+import { useEffect, useMemo, useState } from 'react';
+import { getPokemon, getPokemonList } from '@/services/pokemon';
 import type {
   PokemonDetail,
   PokemonListItem,
   PokemonSortKey,
-} from "@/types/pokemon";
-import { getIdFromUrl } from "@/utils/pokemon/getIdFromUrl";
-import { sortStrategies } from "@/utils/pokemon/sort";
+} from '@/types/pokemon';
+import { getIdFromUrl } from '@/utils/pokemon/getIdFromUrl';
+import { sortStrategies } from '@/utils/pokemon/sort';
 
 const TOTAL_POKEMON_LIMIT = 10000;
 const PAGE_SIZE = 20;
@@ -40,8 +40,8 @@ export function usePokemonList({ query, sort, page }: UsePokemonListProps) {
         });
         setMasterList(res.results);
       } catch (err) {
-        if (err instanceof Error && err.name === "AbortError") return;
-        setError("Failed to load Pokemon list");
+        if (err instanceof Error && err.name === 'AbortError') return;
+        setError('Failed to load Pokemon list');
       } finally {
         setListLoading(false);
       }
@@ -85,14 +85,14 @@ export function usePokemonList({ query, sort, page }: UsePokemonListProps) {
         setDetailsLoading(true);
         const results = await Promise.all(
           paginatedResults.map((p) =>
-            getPokemon(p.name, { signal: controller.signal }),
-          ),
+            getPokemon(p.name, { signal: controller.signal })
+          )
         );
 
         setDetails(results);
       } catch (err) {
-        if (err instanceof Error && err.name === "AbortError") return;
-        setError("Failed to load Pokemon details");
+        if (err instanceof Error && err.name === 'AbortError') return;
+        setError('Failed to load Pokemon details');
       } finally {
         setDetailsLoading(false);
       }

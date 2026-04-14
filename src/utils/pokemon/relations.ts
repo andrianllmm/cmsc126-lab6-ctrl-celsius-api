@@ -1,4 +1,4 @@
-import { POKEMON_TYPES, type PokemonTypeData } from "@/types/pokemon";
+import { POKEMON_TYPES, type PokemonTypeData } from '@/types/pokemon';
 
 export const computeRelations = (typeData?: PokemonTypeData[]) => {
   const effectiveness: Record<string, number> = {};
@@ -9,15 +9,15 @@ export const computeRelations = (typeData?: PokemonTypeData[]) => {
 
   typeData?.forEach((type) => {
     type.damage_relations.double_damage_from.forEach(
-      (t) => (effectiveness[t.name] *= 2),
+      (t) => (effectiveness[t.name] *= 2)
     );
 
     type.damage_relations.half_damage_from.forEach(
-      (t) => (effectiveness[t.name] *= 0.5),
+      (t) => (effectiveness[t.name] *= 0.5)
     );
 
     type.damage_relations.no_damage_from.forEach(
-      (t) => (effectiveness[t.name] = 0),
+      (t) => (effectiveness[t.name] = 0)
     );
   });
 
@@ -29,7 +29,7 @@ export const computeRelations = (typeData?: PokemonTypeData[]) => {
 
   typeData?.forEach((type) => {
     type.damage_relations.double_damage_to.forEach((t) =>
-      strengths.add(t.name),
+      strengths.add(t.name)
     );
   });
 

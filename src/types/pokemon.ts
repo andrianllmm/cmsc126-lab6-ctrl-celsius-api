@@ -34,8 +34,8 @@ export interface PokemonDetail {
     front_default: string | null;
     front_shiny: string | null;
     versions?: {
-      "generation-v"?: {
-        "black-white"?: {
+      'generation-v'?: {
+        'black-white'?: {
           animated?: { front_default?: string; front_shiny?: string };
           front_default?: string;
           front_shiny?: string;
@@ -92,38 +92,38 @@ export type PokemonTypeData = {
 };
 
 export const POKEMON_TYPES = [
-  "normal",
-  "fire",
-  "water",
-  "electric",
-  "grass",
-  "ice",
-  "fighting",
-  "poison",
-  "ground",
-  "flying",
-  "psychic",
-  "bug",
-  "rock",
-  "ghost",
-  "dragon",
-  "dark",
-  "steel",
-  "fairy",
+  'normal',
+  'fire',
+  'water',
+  'electric',
+  'grass',
+  'ice',
+  'fighting',
+  'poison',
+  'ground',
+  'flying',
+  'psychic',
+  'bug',
+  'rock',
+  'ghost',
+  'dragon',
+  'dark',
+  'steel',
+  'fairy',
 ] as const;
 
 export type PokemonType = (typeof POKEMON_TYPES)[number];
 
 export type PokemonColor =
-  | "black"
-  | "blue"
-  | "brown"
-  | "gray"
-  | "green"
-  | "pink"
-  | "purple"
-  | "red"
-  | "white"
-  | "yellow";
+  | 'black'
+  | 'blue'
+  | 'brown'
+  | 'gray'
+  | 'green'
+  | 'pink'
+  | 'purple'
+  | 'red'
+  | 'white'
+  | 'yellow';
 
-export type PokemonSortKey = "id-asc" | "id-desc" | "name-asc" | "name-desc";
+export type PokemonSortKey = 'id-asc' | 'id-desc' | 'name-asc' | 'name-desc';

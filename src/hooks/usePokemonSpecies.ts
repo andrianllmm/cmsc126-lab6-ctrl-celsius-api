@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { getPokemonSpecies } from "@/services/pokemon";
-import type { PokemonSpecies } from "@/types/pokemon";
+import { useEffect, useState } from 'react';
+import { getPokemonSpecies } from '@/services/pokemon';
+import type { PokemonSpecies } from '@/types/pokemon';
 
 /**
  * Custom hook to fetch Pokémon species data.
@@ -29,10 +29,10 @@ export function usePokemonSpecies(pokemonName?: string) {
 
         setSpecies(res);
       } catch (err) {
-        if (err instanceof Error && err.name === "AbortError") return;
+        if (err instanceof Error && err.name === 'AbortError') return;
 
         setError(
-          err instanceof Error ? err.message : "Failed to fetch species",
+          err instanceof Error ? err.message : 'Failed to fetch species'
         );
         setSpecies(null);
       } finally {

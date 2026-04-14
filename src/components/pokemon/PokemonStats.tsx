@@ -1,36 +1,36 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/8bit/card";
+} from '@/components/ui/8bit/card';
 
-import HealthBar from "@/components/ui/8bit/health-bar";
-import ManaBar from "@/components/ui/8bit/mana-bar";
-import { Progress } from "@/components/ui/8bit/progress";
+import HealthBar from '@/components/ui/8bit/health-bar';
+import ManaBar from '@/components/ui/8bit/mana-bar';
+import { Progress } from '@/components/ui/8bit/progress';
 
-import type { PokemonDetail } from "@/types/pokemon";
-import { toPercent } from "@/utils/toPercent";
+import type { PokemonDetail } from '@/types/pokemon';
+import { toPercent } from '@/utils/toPercent';
 
-type Props = React.ComponentProps<"div"> & {
+type Props = React.ComponentProps<'div'> & {
   pokemon: PokemonDetail;
 };
 
 const MAX_STAT = 255;
 
-function getStat(stats: PokemonDetail["stats"], name: string) {
+function getStat(stats: PokemonDetail['stats'], name: string) {
   return stats.find((s) => s.stat.name === name)?.base_stat ?? 0;
 }
 
 export function PokemonStats({ className, pokemon, ...props }: Props) {
-  const hp = getStat(pokemon.stats, "hp");
-  const attack = getStat(pokemon.stats, "attack");
-  const defense = getStat(pokemon.stats, "defense");
-  const spAttack = getStat(pokemon.stats, "special-attack");
-  const spDefense = getStat(pokemon.stats, "special-defense");
-  const speed = getStat(pokemon.stats, "speed");
+  const hp = getStat(pokemon.stats, 'hp');
+  const attack = getStat(pokemon.stats, 'attack');
+  const defense = getStat(pokemon.stats, 'defense');
+  const spAttack = getStat(pokemon.stats, 'special-attack');
+  const spDefense = getStat(pokemon.stats, 'special-defense');
+  const speed = getStat(pokemon.stats, 'speed');
 
   return (
     <Card className={cn(className)} {...props}>
@@ -38,10 +38,10 @@ export function PokemonStats({ className, pokemon, ...props }: Props) {
         <CardTitle>Stats</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className='space-y-4'>
         {/* HP */}
         <div>
-          <div className="flex justify-between text-sm mb-2">
+          <div className='flex justify-between text-sm mb-2'>
             <span>HP</span>
             <span>{hp}</span>
           </div>
@@ -50,7 +50,7 @@ export function PokemonStats({ className, pokemon, ...props }: Props) {
 
         {/* Attack */}
         <div>
-          <div className="flex justify-between text-sm mb-2">
+          <div className='flex justify-between text-sm mb-2'>
             <span>Attack</span>
             <span>{attack}</span>
           </div>
@@ -59,7 +59,7 @@ export function PokemonStats({ className, pokemon, ...props }: Props) {
 
         {/* Defense */}
         <div>
-          <div className="flex justify-between text-sm mb-2">
+          <div className='flex justify-between text-sm mb-2'>
             <span>Defense</span>
             <span>{defense}</span>
           </div>
@@ -68,7 +68,7 @@ export function PokemonStats({ className, pokemon, ...props }: Props) {
 
         {/* Special Attack */}
         <div>
-          <div className="flex justify-between text-sm mb-2">
+          <div className='flex justify-between text-sm mb-2'>
             <span>Sp. Atk</span>
             <span>{spAttack}</span>
           </div>
@@ -77,7 +77,7 @@ export function PokemonStats({ className, pokemon, ...props }: Props) {
 
         {/* Special Defense */}
         <div>
-          <div className="flex justify-between text-sm mb-2">
+          <div className='flex justify-between text-sm mb-2'>
             <span>Sp. Def</span>
             <span>{spDefense}</span>
           </div>
@@ -86,7 +86,7 @@ export function PokemonStats({ className, pokemon, ...props }: Props) {
 
         {/* Speed */}
         <div>
-          <div className="flex justify-between text-sm mb-2">
+          <div className='flex justify-between text-sm mb-2'>
             <span>Speed</span>
             <span>{speed}</span>
           </div>

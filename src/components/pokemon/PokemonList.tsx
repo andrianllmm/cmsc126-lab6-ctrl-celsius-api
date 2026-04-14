@@ -1,6 +1,6 @@
-import { usePokemonColors } from "@/hooks/usePokemonColors";
-import PokemonCard from "./PokemonCard";
-import type { PokemonDetail } from "@/types/pokemon";
+import { usePokemonColors } from '@/hooks/usePokemonColors';
+import PokemonCard from './PokemonCard';
+import type { PokemonDetail } from '@/types/pokemon';
 
 type Props = {
   pokemons: PokemonDetail[];
@@ -18,7 +18,7 @@ const PokemonList = ({ pokemons }: Props) => {
           key={p.id}
           pokemon={p}
           color={colors[p.name]}
-          className={`h-full ${loading && "opacity-90"}`}
+          className={`h-full ${loading && 'opacity-90'}`}
         />
       ))}
     </div>

@@ -1,4 +1,4 @@
-import { Input } from "./ui/8bit/input";
+import { Input } from './ui/8bit/input';
 
 interface SearchBoxProps {
   className?: string;

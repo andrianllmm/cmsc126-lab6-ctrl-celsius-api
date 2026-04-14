@@ -4,12 +4,12 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/8bit/select";
+} from '@/components/ui/8bit/select';
 import {
   POKEMON_SORT_OPTIONS,
   type PokemonSortValue,
-} from "@/constants/pokemon";
-import { cn } from "@/lib/utils";
+} from '@/constants/pokemon';
+import { cn } from '@/lib/utils';
 
 interface PokemonSortProps {
   value: PokemonSortValue;
@@ -20,8 +20,8 @@ interface PokemonSortProps {
 const PokemonSort = ({ value, onChange, className }: PokemonSortProps) => {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={cn("w-40", className)}>
-        <SelectValue placeholder="Sort" />
+      <SelectTrigger className={cn('w-40', className)}>
+        <SelectValue placeholder='Sort' />
       </SelectTrigger>
 
       <SelectContent>

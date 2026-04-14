@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import type { PokemonDetail, PokemonTypeData } from "@/types/pokemon";
+import { useEffect, useState } from 'react';
+import type { PokemonDetail, PokemonTypeData } from '@/types/pokemon';
 
-export function usePokemonTypeData(types?: PokemonDetail["types"]) {
+export function usePokemonTypeData(types?: PokemonDetail['types']) {
   const [typeData, setTypeData] = useState<PokemonTypeData[]>([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export function usePokemonTypeData(types?: PokemonDetail["types"]) {
 
     (async () => {
       const results = await Promise.all(
-        types.map((t) => fetch(t.type.url).then((res) => res.json())),
+        types.map((t) => fetch(t.type.url).then((res) => res.json()))
       );
 
       if (!cancelled) setTypeData(results);

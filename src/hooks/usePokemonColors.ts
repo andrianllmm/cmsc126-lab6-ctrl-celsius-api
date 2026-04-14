@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import type { PokemonColor, PokemonDetail } from "@/types/pokemon";
-import { getPokemonColor } from "@/services/pokemon";
+import { useEffect, useState, useRef } from 'react';
+import type { PokemonColor, PokemonDetail } from '@/types/pokemon';
+import { getPokemonColor } from '@/services/pokemon';
 
 export function usePokemonColors(pokemons: PokemonDetail[]) {
   const [colors, setColors] = useState<Record<string, PokemonColor>>({});
@@ -29,9 +29,9 @@ export function usePokemonColors(pokemons: PokemonDetail[]) {
           namesToFetch.map(async (name) => {
             const color = await getPokemonColor(name, {
               signal: controller.signal,
-            }).catch(() => "white" as PokemonColor);
+            }).catch(() => 'white' as PokemonColor);
             return [name, color] as const;
-          }),
+          })
         );
 
         if (isMounted) {
@@ -42,8 +42,8 @@ export function usePokemonColors(pokemons: PokemonDetail[]) {
           setColors((prev) => ({ ...prev, ...newBatch }));
         }
       } catch (err) {
-        if (err instanceof Error && err.name !== "AbortError") {
-          console.error("Color fetch error:", err);
+        if (err instanceof Error && err.name !== 'AbortError') {
+          console.error('Color fetch error:', err);
         }
       } finally {
         namesToFetch.forEach((n) => fetchingRef.current.delete(n));

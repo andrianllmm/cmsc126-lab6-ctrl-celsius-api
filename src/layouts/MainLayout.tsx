@@ -1,17 +1,17 @@
-import SiteFooter from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { Outlet } from "react-router";
+import SiteFooter from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+import { Outlet } from 'react-router';
 
 export default function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className='min-h-screen flex flex-col'>
       <SiteHeader />
 
-      <main className="flex-1 mx-auto w-full max-w-300 px-4 py-6 md:px-6 my-4">
+      <main className='flex-1 mx-auto w-full max-w-300 px-4 py-6 md:px-6 my-4'>
         <Outlet />
       </main>
 
-      <SiteFooter className="mt-8" />
+      <SiteFooter className='mt-8' />
     </div>
   );
 }

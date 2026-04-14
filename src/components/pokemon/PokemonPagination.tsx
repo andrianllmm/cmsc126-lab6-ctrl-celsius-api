@@ -5,8 +5,8 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/8bit/pagination";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/8bit/pagination';
+import { cn } from '@/lib/utils';
 
 interface PokemonPaginationProps {
   page: number;
@@ -31,7 +31,7 @@ const PokemonPagination = ({
   const canNext = page < totalPages - 1;
 
   const pages = Array.from({ length: 3 }, (_, i) => page - 1 + i).filter(
-    (p) => p >= 0 && p < totalPages,
+    (p) => p >= 0 && p < totalPages
   );
 
   return (
@@ -39,7 +39,7 @@ const PokemonPagination = ({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href="#"
+            href='#'
             onClick={(e) => {
               e.preventDefault();
               if (canPrev) onPageChange(page - 1);
@@ -50,7 +50,7 @@ const PokemonPagination = ({
         {pages.map((p) => (
           <PaginationItem key={p}>
             <PaginationLink
-              href="#"
+              href='#'
               isActive={p === page}
               onClick={(e) => {
                 e.preventDefault();
@@ -64,7 +64,7 @@ const PokemonPagination = ({
 
         <PaginationItem>
           <PaginationNext
-            href="#"
+            href='#'
             onClick={(e) => {
               e.preventDefault();
               if (canNext) onPageChange(page + 1);

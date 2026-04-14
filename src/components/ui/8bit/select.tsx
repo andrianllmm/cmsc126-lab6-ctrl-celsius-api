@@ -1,7 +1,7 @@
-import type * as SelectPrimitive from "@radix-ui/react-select";
-import { type VariantProps, cva } from "class-variance-authority";
+import type * as SelectPrimitive from '@radix-ui/react-select';
+import { type VariantProps, cva } from 'class-variance-authority';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 import {
   Select as ShadcnSelect,
@@ -14,19 +14,19 @@ import {
   SelectSeparator as ShadcnSelectSeparator,
   SelectTrigger as ShadcnSelectTrigger,
   SelectValue as ShadcnSelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
-import "@/components/ui/8bit/styles/retro.css";
+import '@/components/ui/8bit/styles/retro.css';
 
-export const inputVariants = cva("", {
+export const inputVariants = cva('', {
   variants: {
     font: {
-      normal: "",
-      retro: "retro",
+      normal: '',
+      retro: 'retro',
     },
   },
   defaultVariants: {
-    font: "retro",
+    font: 'retro',
   },
 });
 
@@ -59,7 +59,7 @@ function SelectValue({ ...props }: BitSelectValueProps) {
 
   return (
     <ShadcnSelectValue
-      className={cn(font !== "normal" && "retro")}
+      className={cn(font !== 'normal' && 'retro')}
       {...props}
     />
   );
@@ -78,21 +78,21 @@ function SelectTrigger({ children, ...props }: BitSelectTriggerProps) {
   return (
     <div
       className={cn(
-        "relative border-y-6 border-foreground dark:border-ring",
+        'relative border-y-6 border-foreground dark:border-ring',
         className,
-        font !== "normal" && "retro",
+        font !== 'normal' && 'retro'
       )}
     >
       <ShadcnSelectTrigger
         {...props}
-        className={cn("rounded-none ring-0 w-full border-0", className)}
+        className={cn('rounded-none ring-0 w-full border-0', className)}
       >
         {children}
       </ShadcnSelectTrigger>
 
       <div
-        className="absolute inset-0 border-x-6 -mx-1.5 border-foreground dark:border-ring pointer-events-none"
-        aria-hidden="true"
+        className='absolute inset-0 border-x-6 -mx-1.5 border-foreground dark:border-ring pointer-events-none'
+        aria-hidden='true'
       />
     </div>
   );
@@ -115,9 +115,9 @@ function SelectContent({
   return (
     <ShadcnSelectContent
       className={cn(
-        font !== "normal" && "retro",
+        font !== 'normal' && 'retro',
         className,
-        "relative rounded-none border-4 border-foreground dark:border-ring -ml-1 mt-1",
+        'relative rounded-none border-4 border-foreground dark:border-ring -ml-1 mt-1'
       )}
       {...props}
     >
@@ -142,7 +142,7 @@ function SelectItem({
     <ShadcnSelectItem
       className={cn(
         className,
-        "rounded-none border-y-3 border-dashed border-ring/0 hover:border-foreground dark:hover:border-ring",
+        'rounded-none border-y-3 border-dashed border-ring/0 hover:border-foreground dark:hover:border-ring'
       )}
       {...props}
     >

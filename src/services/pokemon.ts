@@ -2,9 +2,9 @@ import type {
   PokemonListResponse,
   PokemonDetail,
   PokemonSpecies,
-} from "@/types/pokemon";
+} from '@/types/pokemon';
 
-const BASE_URL = "https://pokeapi.co/api/v2";
+const BASE_URL = 'https://pokeapi.co/api/v2';
 
 /**
  * Fetches a list of Pokemon names and URLs.
@@ -12,14 +12,14 @@ const BASE_URL = "https://pokeapi.co/api/v2";
 export async function getPokemonList(
   limit = 20,
   offset = 0,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<PokemonListResponse> {
   const res = await fetch(
     `${BASE_URL}/pokemon?limit=${limit}&offset=${offset}`,
-    options,
+    options
   );
 
-  if (!res.ok) throw new Error("Failed to fetch Pokemon list");
+  if (!res.ok) throw new Error('Failed to fetch Pokemon list');
 
   return res.json();
 }
@@ -29,11 +29,11 @@ export async function getPokemonList(
  */
 export async function getPokemon(
   id: string,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<PokemonDetail> {
   const res = await fetch(`${BASE_URL}/pokemon/${id}`, options);
 
-  if (!res.ok) throw new Error("Failed to fetch Pokemon");
+  if (!res.ok) throw new Error('Failed to fetch Pokemon');
 
   return res.json();
 }
@@ -43,11 +43,11 @@ export async function getPokemon(
  */
 export async function getPokemonSpecies(
   id: string,
-  options?: RequestInit, // Added
+  options?: RequestInit // Added
 ): Promise<PokemonSpecies> {
   const res = await fetch(`${BASE_URL}/pokemon-species/${id}`, options);
 
-  if (!res.ok) throw new Error("Failed to fetch Pokemon species");
+  if (!res.ok) throw new Error('Failed to fetch Pokemon species');
 
   return res.json();
 }
@@ -57,7 +57,7 @@ export async function getPokemonSpecies(
  */
 export async function getPokemonColor(
   name: string,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<string> {
   const species = await getPokemonSpecies(name, options);
   return species.color.name;
