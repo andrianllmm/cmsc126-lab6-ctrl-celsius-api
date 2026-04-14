@@ -53,9 +53,12 @@ const PokemonCard = ({ pokemon, color, className }: Props) => {
             alt={pokemon.name}
             className="transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover:brightness-110"
           />
-          <h3 className="text-center font-semibold capitalize">
-            {pokemon.name}
-          </h3>
+          <div className="flex flex-col gap-1 justify-center items-center">
+            <p className="text-[10px] text-foreground/80">#{pokemon.id}</p>
+            <h3 className="text-center font-semibold capitalize">
+              {pokemon.name}
+            </h3>
+          </div>
           <div className="flex gap-4 justify-center flex-wrap">
             {pokemon.types.map((t) => (
               <PokemonTypeBadge key={t.type.name} type={t.type.name} />
