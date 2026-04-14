@@ -33,7 +33,7 @@ const PokemonPage = () => {
   const typeData = usePokemonTypeData(pokemon?.types);
 
   const cryUrl = pokemon?.cries?.latest || pokemon?.cries?.legacy;
-  const { audioRef, isPlaying, playCry, onEnded } = usePokemonCry(cryUrl);
+  const { audioRef, isPlaying, playCry } = usePokemonCry(cryUrl);
 
   if (loading) return <Loading />;
 
@@ -47,7 +47,7 @@ const PokemonPage = () => {
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8">
-      {cryUrl && <audio ref={audioRef} src={cryUrl} onEnded={onEnded} />}
+      {cryUrl && <audio ref={audioRef} src={cryUrl} />}
 
       <PokemonHeader id={pokemon.id} />
 
