@@ -60,7 +60,12 @@ const PokedexPage = () => {
         <>
           <PokemonList pokemons={data} />
 
-          <PokemonPagination page={page} total={total} onPageChange={setPage} />
+          <PokemonPagination
+            page={page}
+            total={total}
+            onPageChange={setPage}
+            className="mt-8"
+          />
         </>
       )}
     </div>

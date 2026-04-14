@@ -6,12 +6,14 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/8bit/pagination";
+import { cn } from "@/lib/utils";
 
 interface PokemonPaginationProps {
   page: number;
   total: number;
   pageSize?: number;
   onPageChange: (page: number) => void;
+  className?: string;
 }
 
 const PokemonPagination = ({
@@ -19,6 +21,7 @@ const PokemonPagination = ({
   total,
   pageSize = 20,
   onPageChange,
+  className,
 }: PokemonPaginationProps) => {
   const totalPages = Math.ceil(total / pageSize);
 
@@ -32,7 +35,7 @@ const PokemonPagination = ({
   );
 
   return (
-    <Pagination>
+    <Pagination className={cn(className)}>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
