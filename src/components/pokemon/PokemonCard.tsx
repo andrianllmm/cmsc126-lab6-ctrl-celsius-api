@@ -10,7 +10,7 @@ import { cva } from "class-variance-authority";
 const pokemonThemeColors = cva("", {
   variants: {
     color: {
-      black: "bg-pokemon-black",
+      black: "bg-pokemon-black text-background",
       blue: "bg-pokemon-blue",
       brown: "bg-pokemon-brown",
       gray: "bg-pokemon-gray",
@@ -54,7 +54,7 @@ const PokemonCard = ({ pokemon, color, className }: Props) => {
             className="transition-all duration-300 ease-in-out group-hover:scale-112 group-hover:rotate-3 group-hover:brightness-110"
           />
           <div className="flex flex-col gap-1 justify-center items-center">
-            <p className="text-[10px] text-foreground/80">#{pokemon.id}</p>
+            <p className="text-[10px] opacity-80">#{pokemon.id}</p>
             <h3 className="text-center font-semibold capitalize">
               {pokemon.name}
             </h3>

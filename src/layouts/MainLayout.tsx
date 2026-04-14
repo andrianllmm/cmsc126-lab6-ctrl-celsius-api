@@ -4,10 +4,10 @@ import { Outlet } from "react-router";
 
 export default function MainLayout() {
   return (
-    <div className="app-shell">
+    <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-300 px-4 py-6 md:px-6 my-4">
+      <main className="flex-1 mx-auto w-full max-w-300 px-4 py-6 md:px-6 my-4">
         <Outlet />
       </main>
 

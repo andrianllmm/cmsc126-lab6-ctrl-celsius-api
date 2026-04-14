@@ -74,3 +74,5 @@ export type PokemonColor =
   | "red"
   | "white"
   | "yellow";
+
+export type PokemonSortKey = "id-asc" | "id-desc" | "name-asc" | "name-desc";
