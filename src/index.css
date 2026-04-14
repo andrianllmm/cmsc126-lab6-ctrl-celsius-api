@@ -71,6 +71,14 @@
   --sidebar-accent-foreground: var(--accent-foreground);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
+
+  --retro-bg: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.025) 0px,
+    rgba(0, 0, 0, 0.025) 8px,
+    transparent 8px,
+    transparent 16px
+  );
 }
 
 @layer base {
@@ -79,6 +87,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: var(--retro-bg);
+    background-size: 16px 16px;
   }
   html {
     @apply font-sans;
