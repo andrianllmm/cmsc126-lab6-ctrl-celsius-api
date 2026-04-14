@@ -9,16 +9,18 @@ import {
   POKEMON_SORT_OPTIONS,
   type PokemonSortValue,
 } from "@/config/pokemonSort";
+import { cn } from "@/lib/utils";
 
 interface PokemonSortProps {
   value: PokemonSortValue;
   onChange: (value: PokemonSortValue) => void;
+  className?: string;
 }
 
-const PokemonSort = ({ value, onChange }: PokemonSortProps) => {
+const PokemonSort = ({ value, onChange, className }: PokemonSortProps) => {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-45">
+      <SelectTrigger className={cn("w-40", className)}>
         <SelectValue placeholder="Sort" />
       </SelectTrigger>
 
