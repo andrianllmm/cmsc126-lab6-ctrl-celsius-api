@@ -11,7 +11,7 @@ const PokemonSprite = ({ src, alt, className }: Props) => {
     <img
       src={src ?? ""}
       alt={alt}
-      className={cn("w-24 h-24", className)}
+      className={cn("pixelated w-24 h-24", className)}
       loading="lazy"
     />
   );
