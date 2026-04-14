@@ -1,33 +1,94 @@
 import { getPokemon, getPokemonList } from "@/services/pokemon";
-import type { PokemonDetail } from "@/types/pokemon";
-import { useEffect, useState } from "react";
+import type { PokemonDetail, PokemonListItem } from "@/types/pokemon";
+import { useEffect, useMemo, useState } from "react";
 
 export function usePokemonList() {
-  const [data, setData] = useState<PokemonDetail[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [list, setList] = useState<PokemonListItem[]>([]);
+  const [data, setData] = useState<PokemonDetail[]>([]);
+
+  const [listLoading, setListLoading] = useState(true);
+  const [detailsLoading, setDetailsLoading] = useState(false);
+
   const [error, setError] = useState<string | null>(null);
 
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(0);
+
+  const pageSize = 20;
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchList = async () => {
       try {
-        setLoading(true);
+        setListLoading(true);
+        setError(null);
 
-        const list = await getPokemonList();
-
-        const details = await Promise.all(
-          list.results.map((p) => getPokemon(p.name)),
-        );
-
-        setData(details);
-      } catch (err) {
-        setError("Something went wrong: " + err);
+        const res = await getPokemonList(10000, 0);
+        setList(res.results);
+      } catch {
+        setError("Failed to load Pokemon list");
       } finally {
-        setLoading(false);
+        setListLoading(false);
       }
     };
 
-    fetchData();
+    fetchList();
   }, []);
 
-  return { data, loading, error };
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return list;
+
+    return list.filter((p) => {
+      const id = p.url.split("/").filter(Boolean).pop() ?? "";
+      return p.name.toLowerCase().includes(q) || id === q;
+    });
+  }, [list, query]);
+
+  const paginated = useMemo(() => {
+    const start = page * pageSize;
+    return filtered.slice(start, start + pageSize);
+  }, [filtered, page]);
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        setDetailsLoading(true);
+        setError(null);
+
+        const details = await Promise.all(
+          paginated.map((p) => getPokemon(p.name)),
+        );
+
+        setData(details);
+      } catch {
+        setError("Failed to load Pokemon details");
+      } finally {
+        setDetailsLoading(false);
+      }
+    };
+
+    if (paginated.length) {
+      fetchDetails();
+    } else {
+      setData([]);
+    }
+  }, [paginated]);
+
+  return {
+    data,
+    error,
+
+    loading: listLoading || detailsLoading,
+
+    listLoading,
+    detailsLoading,
+
+    query,
+    setQuery,
+
+    page,
+    setPage,
+
+    total: filtered.length,
+  };
 }
