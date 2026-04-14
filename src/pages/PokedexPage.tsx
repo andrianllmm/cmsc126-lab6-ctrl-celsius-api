@@ -1,4 +1,5 @@
 import PokemonList from "@/components/pokemon/PokemonList";
+import { Loading } from "@/components/ui/loading";
 import { usePokemonList } from "@/hooks/usePokemonList";
 
 const PokedexPage = () => {
@@ -9,7 +10,7 @@ const PokedexPage = () => {
   }
 
   if (loading || !data) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

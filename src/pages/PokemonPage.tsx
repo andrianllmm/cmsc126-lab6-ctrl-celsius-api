@@ -1,3 +1,4 @@
+import { Loading } from "@/components/ui/loading";
 import { usePokemon } from "@/hooks/usePokemon";
 import { useParams } from "react-router";
 
@@ -11,7 +12,7 @@ const PokemonPage = () => {
   }
 
   if (loading || !data) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
