@@ -41,6 +41,8 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --color-pokedex-red: var(--pokedex-red);
+  --color-pokedex-dark-red: var(--pokedex-dark-red);
 }
 
 :root {
@@ -71,6 +73,9 @@
   --sidebar-accent-foreground: var(--accent-foreground);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
+
+  --pokedex-red: oklch(0.55 0.22 25);
+  --pokedex-dark-red: oklch(0.42 0.18 25);
 
   --retro-bg: repeating-linear-gradient(
     0deg,
