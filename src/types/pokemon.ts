@@ -68,7 +68,48 @@ export interface ChainLink {
   }[];
 }
 
+export interface PokemonSpecies {
+  color: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface PokemonWithColor {
+  pokemon: PokemonDetail;
+  color: string;
+}
+
 export type PokemonType =
-  | "normal" | "fire" | "water" | "electric" | "grass" | "ice"
-  | "fighting" | "poison" | "ground" | "flying" | "psychic"
-  | "bug" | "rock" | "ghost" | "dragon" | "dark" | "steel" | "fairy";
+  | "normal"
+  | "fire"
+  | "water"
+  | "electric"
+  | "grass"
+  | "ice"
+  | "fighting"
+  | "poison"
+  | "ground"
+  | "flying"
+  | "psychic"
+  | "bug"
+  | "rock"
+  | "ghost"
+  | "dragon"
+  | "dark"
+  | "steel"
+  | "fairy";
+
+export type PokemonColor =
+  | "black"
+  | "blue"
+  | "brown"
+  | "gray"
+  | "green"
+  | "pink"
+  | "purple"
+  | "red"
+  | "white"
+  | "yellow";
+
+export type PokemonSortKey = "id-asc" | "id-desc" | "name-asc" | "name-desc";

@@ -1,22 +1,102 @@
+import { useSearchParams } from "react-router";
 import PokemonList from "@/components/pokemon/PokemonList";
+import SearchBox from "@/components/SearchBox";
 import { Loading } from "@/components/ui/loading";
 import { usePokemonList } from "@/hooks/usePokemonList";
+import PokemonPagination from "@/components/pokemon/PokemonPagination";
+import PokemonSort from "@/components/pokemon/PokemonSort";
+import type { PokemonSortKey } from "@/types/pokemon";
 
 const PokedexPage = () => {
-  const { data, loading, error } = usePokemonList();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  const query = searchParams.get("q") ?? "";
+  const page = Math.max(0, Number(searchParams.get("page") ?? "1") - 1);
+  const sort = (searchParams.get("sort") as PokemonSortKey) ?? "id-asc";
 
-  if (loading || !data) {
-    return <Loading />;
-  }
+  const setQuery = (value: string) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+
+      if (value) next.set("q", value);
+      else next.delete("q");
+
+      next.delete("page");
+
+      return next;
+    });
+  };
+
+  const setPage = (value: number) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+
+      if (query) next.set("q", query);
+      else next.delete("q");
+
+      if (value === 0) next.delete("page");
+      else next.set("page", String(value + 1));
+
+      return next;
+    });
+  };
+
+  const setSort = (value: string) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+
+      if (query) next.set("q", query);
+      else next.delete("q");
+
+      next.set("sort", value);
+      next.delete("page");
+
+      return next;
+    });
+  };
+
+  const { data, listLoading, error, total } = usePokemonList({
+    query,
+    page,
+    sort,
+  });
 
   return (
-    <>
-      <PokemonList pokemon={data} />
-    </>
+    <div>
+      <div className="w-full flex flex-col md:flex-row justify-center items-center gap-4 mb-8 ">
+        <SearchBox
+          value={query}
+          onChange={setQuery}
+          className="w-full md:max-w-80"
+        />
+        <PokemonSort
+          value={sort}
+          onChange={setSort}
+          className="w-full md:max-w-40"
+        />
+      </div>
+
+      {error && (
+        <div className="retro text-center m-4 text-destructive">
+          An error occurred
+        </div>
+      )}
+
+      {listLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <PokemonList pokemons={data} />
+
+          <PokemonPagination
+            page={page}
+            total={total}
+            onPageChange={setPage}
+            className="mt-8"
+          />
+        </>
+      )}
+    </div>
   );
 };
 
