@@ -16,7 +16,7 @@ export interface PokemonDetail {
 
   types: {
     type: {
-      name: string;
+      name: PokemonType;
     };
   }[];
 
@@ -30,3 +30,23 @@ export interface PokemonDetail {
     front_default: string | null;
   };
 }
+
+export type PokemonType =
+  | "normal"
+  | "fire"
+  | "water"
+  | "electric"
+  | "grass"
+  | "ice"
+  | "fighting"
+  | "poison"
+  | "ground"
+  | "flying"
+  | "psychic"
+  | "bug"
+  | "rock"
+  | "ghost"
+  | "dragon"
+  | "dark"
+  | "steel"
+  | "fairy";

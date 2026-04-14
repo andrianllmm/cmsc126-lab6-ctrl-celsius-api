@@ -28,7 +28,7 @@ const PokemonCard = ({ pokemon }: Props) => {
           <h3 className="text-center font-semibold capitalize">
             {pokemon.name}
           </h3>
-          <div className="flex gap-1 justify-center mt-2 flex-wrap">
+          <div className="flex gap-4 justify-center mt-2 flex-wrap">
             {pokemon.types.map((t) => (
               <PokemonTypeBadge key={t.type.name} type={t.type.name} />
             ))}
