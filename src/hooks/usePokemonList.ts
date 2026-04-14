@@ -2,7 +2,13 @@ import { getPokemon, getPokemonList } from "@/services/pokemon";
 import type { PokemonDetail, PokemonListItem } from "@/types/pokemon";
 import { useEffect, useMemo, useState } from "react";
 
-export function usePokemonList() {
+export function usePokemonList({
+  query,
+  page,
+}: {
+  query: string;
+  page: number;
+}) {
   const [list, setList] = useState<PokemonListItem[]>([]);
   const [data, setData] = useState<PokemonDetail[]>([]);
 
@@ -10,9 +16,6 @@ export function usePokemonList() {
   const [detailsLoading, setDetailsLoading] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
-
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(0);
 
   const pageSize = 20;
 
@@ -82,12 +85,6 @@ export function usePokemonList() {
 
     listLoading,
     detailsLoading,
-
-    query,
-    setQuery,
-
-    page,
-    setPage,
 
     total: filtered.length,
   };
