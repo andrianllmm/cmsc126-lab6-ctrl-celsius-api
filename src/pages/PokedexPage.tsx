@@ -15,7 +15,7 @@ const PokedexPage = () => {
 
   return (
     <>
-      <PokemonList pokemon={data} />
+      <PokemonList pokemons={data} />
     </>
   );
 };

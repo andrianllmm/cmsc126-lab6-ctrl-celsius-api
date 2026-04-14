@@ -31,6 +31,18 @@ export interface PokemonDetail {
   };
 }
 
+export interface PokemonSpecies {
+  color: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface PokemonWithColor {
+  pokemon: PokemonDetail;
+  color: string;
+}
+
 export type PokemonType =
   | "normal"
   | "fire"
@@ -50,3 +62,15 @@ export type PokemonType =
   | "dark"
   | "steel"
   | "fairy";
+
+export type PokemonColor =
+  | "black"
+  | "blue"
+  | "brown"
+  | "gray"
+  | "green"
+  | "pink"
+  | "purple"
+  | "red"
+  | "white"
+  | "yellow";
