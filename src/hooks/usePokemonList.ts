@@ -1,12 +1,31 @@
 import { getPokemon, getPokemonList } from "@/services/pokemon";
-import type { PokemonDetail, PokemonListItem } from "@/types/pokemon";
+import type {
+  PokemonDetail,
+  PokemonListItem,
+  PokemonSortKey,
+} from "@/types/pokemon";
 import { useEffect, useMemo, useState } from "react";
+
+const getId = (p: PokemonListItem) =>
+  Number(p.url.split("/").filter(Boolean).pop());
+
+const sortStrategies: Record<
+  PokemonSortKey,
+  (a: PokemonListItem, b: PokemonListItem) => number
+> = {
+  "id-asc": (a, b) => getId(a) - getId(b),
+  "id-desc": (a, b) => getId(b) - getId(a),
+  "name-asc": (a, b) => a.name.localeCompare(b.name),
+  "name-desc": (a, b) => b.name.localeCompare(a.name),
+};
 
 export function usePokemonList({
   query,
+  sort,
   page,
 }: {
   query: string;
+  sort: PokemonSortKey;
   page: number;
 }) {
   const [list, setList] = useState<PokemonListItem[]>([]);
@@ -14,7 +33,6 @@ export function usePokemonList({
 
   const [listLoading, setListLoading] = useState(true);
   const [detailsLoading, setDetailsLoading] = useState(false);
-
   const [error, setError] = useState<string | null>(null);
 
   const pageSize = 20;
@@ -47,10 +65,15 @@ export function usePokemonList({
     });
   }, [list, query]);
 
+  const sorted = useMemo(() => {
+    const strategy = sortStrategies[sort];
+    return [...filtered].sort(strategy);
+  }, [filtered, sort]);
+
   const paginated = useMemo(() => {
     const start = page * pageSize;
-    return filtered.slice(start, start + pageSize);
-  }, [filtered, page]);
+    return sorted.slice(start, start + pageSize);
+  }, [sorted, page]);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -82,10 +105,9 @@ export function usePokemonList({
     error,
 
     loading: listLoading || detailsLoading,
-
     listLoading,
     detailsLoading,
 
-    total: filtered.length,
+    total: sorted.length,
   };
 }
