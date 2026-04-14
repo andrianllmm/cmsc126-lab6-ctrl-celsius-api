@@ -40,9 +40,11 @@ const PokemonCard = ({ pokemon, color, className }: Props) => {
     <Link to={`/pokemon/${pokemon.name}`} className="block group">
       <Card
         className={cn(
-          "transition-all duration-200",
-          "hover:-translate-y-1.5",
           "cursor-pointer",
+          "transition-all duration-200 ease-in-out",
+          "group-hover:-translate-y-1.5",
+          "group-hover:scale-101",
+          "group-hover:brightness-105 group-hover:saturate-101",
           pokemonThemeColors({ color }),
           className,
         )}
@@ -51,7 +53,7 @@ const PokemonCard = ({ pokemon, color, className }: Props) => {
           <PokemonSprite
             src={getPokemonSprite(pokemon)}
             alt={pokemon.name}
-            className="transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover:brightness-110"
+            className="transition-all duration-300 ease-in-out group-hover:scale-112 group-hover:rotate-3 group-hover:brightness-110"
           />
           <div className="flex flex-col gap-1 justify-center items-center">
             <p className="text-[10px] text-foreground/80">#{pokemon.id}</p>
