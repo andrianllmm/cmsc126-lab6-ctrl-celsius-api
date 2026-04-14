@@ -15,9 +15,9 @@ import { PokemonEvolution } from "@/components/pokemon/PokemonEvolution";
 import { computeRelations } from "@/utils/pokemon/relations";
 import { Card } from "@/components/ui/8bit/card";
 import { usePokemonCry } from "@/hooks/usePokemonCry";
-import { usePokemonSpecies } from "@/hooks/useSpecies";
+import { usePokemonSpecies } from "@/hooks/usePokemonSpecies";
 import { usePokemonTypeData } from "@/hooks/usePokemonTypeData";
-import { useEvolution } from "@/hooks/useEvolution";
+import { usePokemonEvolution } from "@/hooks/usePokemonEvolution";
 
 const PokemonPage = () => {
   const { name } = useParams();
@@ -26,9 +26,9 @@ const PokemonPage = () => {
 
   const { data: pokemon, loading, error } = usePokemon(pokemonName);
 
-  const species = usePokemonSpecies(pokemon?.name);
+  const { species } = usePokemonSpecies(pokemon?.name);
 
-  const evolution = useEvolution(species?.evolution_chain?.url);
+  const evolution = usePokemonEvolution(species?.evolution_chain?.url);
 
   const typeData = usePokemonTypeData(pokemon?.types);
 

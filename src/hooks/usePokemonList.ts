@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { getPokemon, getPokemonList } from "@/services/pokemon";
 import type {
   PokemonDetail,
@@ -6,97 +7,107 @@ import type {
 } from "@/types/pokemon";
 import { getIdFromUrl } from "@/utils/pokemon/getIdFromUrl";
 import { sortStrategies } from "@/utils/pokemon/sort";
-import { useEffect, useMemo, useState } from "react";
 
-export function usePokemonList({
-  query,
-  sort,
-  page,
-}: {
+const TOTAL_POKEMON_LIMIT = 10000;
+const PAGE_SIZE = 20;
+
+interface UsePokemonListProps {
   query: string;
   sort: PokemonSortKey;
   page: number;
-}) {
-  const [list, setList] = useState<PokemonListItem[]>([]);
-  const [data, setData] = useState<PokemonDetail[]>([]);
+}
 
-  const [listLoading, setListLoading] = useState(true);
+/**
+ * Custom hook to fetch a list of Pokemon.
+ */
+export function usePokemonList({ query, sort, page }: UsePokemonListProps) {
+  const [masterList, setMasterList] = useState<PokemonListItem[]>([]);
+  const [details, setDetails] = useState<PokemonDetail[]>([]);
+  const [listLoading, setListLoading] = useState(false);
   const [detailsLoading, setDetailsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const pageSize = 20;
-
+  // Fetch master list (on mount)
   useEffect(() => {
-    const fetchList = async () => {
+    const controller = new AbortController();
+
+    async function fetchMasterList() {
       try {
         setListLoading(true);
         setError(null);
-
-        const res = await getPokemonList(10000, 0);
-        setList(res.results);
-      } catch {
+        const res = await getPokemonList(TOTAL_POKEMON_LIMIT, 0, {
+          signal: controller.signal,
+        });
+        setMasterList(res.results);
+      } catch (err) {
+        if (err instanceof Error && err.name === "AbortError") return;
         setError("Failed to load Pokemon list");
       } finally {
         setListLoading(false);
       }
-    };
+    }
 
-    fetchList();
+    fetchMasterList();
+    return () => controller.abort();
   }, []);
 
-  const filtered = useMemo(() => {
+  // Filter & sort
+  const processedList = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return list;
 
-    return list.filter((p) => {
-      const id = getIdFromUrl(p.url).toString();
-      return p.name.toLowerCase().includes(q) || id === q;
-    });
-  }, [list, query]);
+    const filtered = !q
+      ? masterList
+      : masterList.filter((p) => {
+          const id = getIdFromUrl(p.url).toString();
+          return p.name.toLowerCase().includes(q) || id === q;
+        });
 
-  const sorted = useMemo(() => {
-    const strategy = sortStrategies[sort];
-    return [...filtered].sort(strategy);
-  }, [filtered, sort]);
+    return [...filtered].sort(sortStrategies[sort]);
+  }, [masterList, query, sort]);
 
-  const paginated = useMemo(() => {
-    const start = page * pageSize;
-    return sorted.slice(start, start + pageSize);
-  }, [sorted, page]);
+  // Pagination
+  const paginatedResults = useMemo(() => {
+    const start = page * PAGE_SIZE;
+    return processedList.slice(start, start + PAGE_SIZE);
+  }, [processedList, page]);
 
+  // Fetch details for the current page
   useEffect(() => {
-    const fetchDetails = async () => {
+    if (paginatedResults.length === 0) {
+      setDetails([]);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    async function fetchDetails() {
       try {
         setDetailsLoading(true);
-        setError(null);
-
-        const details = await Promise.all(
-          paginated.map((p) => getPokemon(p.name)),
+        const results = await Promise.all(
+          paginatedResults.map((p) =>
+            getPokemon(p.name, { signal: controller.signal }),
+          ),
         );
 
-        setData(details);
-      } catch {
+        setDetails(results);
+      } catch (err) {
+        if (err instanceof Error && err.name === "AbortError") return;
         setError("Failed to load Pokemon details");
       } finally {
         setDetailsLoading(false);
       }
-    };
-
-    if (paginated.length) {
-      fetchDetails();
-    } else {
-      setData([]);
     }
-  }, [paginated]);
+
+    fetchDetails();
+    return () => controller.abort();
+  }, [paginatedResults]);
 
   return {
-    data,
+    data: details,
     error,
-
     loading: listLoading || detailsLoading,
     listLoading,
     detailsLoading,
-
-    total: sorted.length,
+    total: processedList.length,
   };
 }

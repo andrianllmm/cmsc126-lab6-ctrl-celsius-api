@@ -6,17 +6,19 @@ type Props = {
   pokemons: PokemonDetail[];
 };
 
-const PokemonList = ({ pokemons: pokemon }: Props) => {
-  const colors = usePokemonColors(pokemon);
+const PokemonList = ({ pokemons }: Props) => {
+  const { colors, loading } = usePokemonColors(pokemons);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      {pokemon.map((p) => (
+    <div
+      className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 transition-opacity duration-300`}
+    >
+      {pokemons.map((p) => (
         <PokemonCard
           key={p.id}
           pokemon={p}
           color={colors[p.name]}
-          className="h-full"
+          className={`h-full ${loading && "opacity-90"}`}
         />
       ))}
     </div>

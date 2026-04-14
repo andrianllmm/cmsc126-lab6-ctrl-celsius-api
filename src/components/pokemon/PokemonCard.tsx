@@ -23,7 +23,7 @@ const pokemonThemeColors = cva("", {
     },
   },
   defaultVariants: {
-    color: "gray",
+    color: "white",
   },
 });
 

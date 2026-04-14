@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getEvolutionChain } from "@/utils/pokemon/evolution";
 
-export function useEvolution(evolutionUrl?: string) {
+export function usePokemonEvolution(evolutionUrl?: string) {
   const [evolution, setEvolution] = useState<{ name: string; url: string }[]>(
     [],
   );
