@@ -46,12 +46,14 @@ export interface PokemonDetail {
   cries?: { latest: string; legacy: string };
 }
 
-// --- ADDED FOR EVOLUTION AND INFO ---
-
 export interface PokemonSpecies {
   flavor_text_entries: { flavor_text: string; language: { name: string } }[];
   genera: { genus: string; language: { name: string } }[];
   evolution_chain: { url: string };
+  color: {
+    name: string;
+    url: string;
+  };
 }
 
 export interface EvolutionChain {
@@ -68,37 +70,49 @@ export interface ChainLink {
   }[];
 }
 
-export interface PokemonSpecies {
-  color: {
-    name: string;
-    url: string;
-  };
-}
-
 export interface PokemonWithColor {
   pokemon: PokemonDetail;
   color: string;
 }
 
-export type PokemonType =
-  | "normal"
-  | "fire"
-  | "water"
-  | "electric"
-  | "grass"
-  | "ice"
-  | "fighting"
-  | "poison"
-  | "ground"
-  | "flying"
-  | "psychic"
-  | "bug"
-  | "rock"
-  | "ghost"
-  | "dragon"
-  | "dark"
-  | "steel"
-  | "fairy";
+export type DamageRelationEntry = {
+  name: string;
+  url: string;
+};
+
+export type PokemonTypeData = {
+  damage_relations: {
+    double_damage_from: DamageRelationEntry[];
+    double_damage_to: DamageRelationEntry[];
+    half_damage_from: DamageRelationEntry[];
+    half_damage_to: DamageRelationEntry[];
+    no_damage_from: DamageRelationEntry[];
+    no_damage_to: DamageRelationEntry[];
+  };
+};
+
+export const POKEMON_TYPES = [
+  "normal",
+  "fire",
+  "water",
+  "electric",
+  "grass",
+  "ice",
+  "fighting",
+  "poison",
+  "ground",
+  "flying",
+  "psychic",
+  "bug",
+  "rock",
+  "ghost",
+  "dragon",
+  "dark",
+  "steel",
+  "fairy",
+] as const;
+
+export type PokemonType = (typeof POKEMON_TYPES)[number];
 
 export type PokemonColor =
   | "black"

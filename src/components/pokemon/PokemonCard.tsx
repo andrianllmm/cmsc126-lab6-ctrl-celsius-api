@@ -1,7 +1,7 @@
 import type { PokemonColor, PokemonDetail } from "@/types/pokemon";
 import PokemonTypeBadge from "./PokemonTypeBadge";
 import PokemonSprite from "./PokemonSprite";
-import { getPokemonSprite } from "@/utils/getPokemonSprite";
+import { getPokemonSprite } from "@/utils/pokemon/getPokemonSprite";
 import { Card, CardContent } from "@/components/ui/8bit/card";
 import { Link } from "react-router";
 import { cn } from "@/lib/utils";

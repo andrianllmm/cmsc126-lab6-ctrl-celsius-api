@@ -8,7 +8,7 @@ import {
 import {
   POKEMON_SORT_OPTIONS,
   type PokemonSortValue,
-} from "@/config/pokemonSort";
+} from "@/constants/pokemon";
 import { cn } from "@/lib/utils";
 
 interface PokemonSortProps {

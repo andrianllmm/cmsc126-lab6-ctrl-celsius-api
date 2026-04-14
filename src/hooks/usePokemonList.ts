@@ -4,20 +4,9 @@ import type {
   PokemonListItem,
   PokemonSortKey,
 } from "@/types/pokemon";
+import { getIdFromUrl } from "@/utils/pokemon/getIdFromUrl";
+import { sortStrategies } from "@/utils/pokemon/sort";
 import { useEffect, useMemo, useState } from "react";
-
-const getId = (p: PokemonListItem) =>
-  Number(p.url.split("/").filter(Boolean).pop());
-
-const sortStrategies: Record<
-  PokemonSortKey,
-  (a: PokemonListItem, b: PokemonListItem) => number
-> = {
-  "id-asc": (a, b) => getId(a) - getId(b),
-  "id-desc": (a, b) => getId(b) - getId(a),
-  "name-asc": (a, b) => a.name.localeCompare(b.name),
-  "name-desc": (a, b) => b.name.localeCompare(a.name),
-};
 
 export function usePokemonList({
   query,
@@ -60,7 +49,7 @@ export function usePokemonList({
     if (!q) return list;
 
     return list.filter((p) => {
-      const id = p.url.split("/").filter(Boolean).pop() ?? "";
+      const id = getIdFromUrl(p.url).toString();
       return p.name.toLowerCase().includes(q) || id === q;
     });
   }, [list, query]);
