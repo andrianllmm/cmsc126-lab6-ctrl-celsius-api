@@ -61,6 +61,16 @@
   --color-type-dark: var(--type-dark);
   --color-type-steel: var(--type-steel);
   --color-type-fairy: var(--type-fairy);
+  --color-pokemon-black: var(--pokemon-black);
+  --color-pokemon-blue: var(--pokemon-blue);
+  --color-pokemon-brown: var(--pokemon-brown);
+  --color-pokemon-gray: var(--pokemon-gray);
+  --color-pokemon-green: var(--pokemon-green);
+  --color-pokemon-pink: var(--pokemon-pink);
+  --color-pokemon-purple: var(--pokemon-purple);
+  --color-pokemon-red: var(--pokemon-red);
+  --color-pokemon-white: var(--pokemon-white);
+  --color-pokemon-yellow: var(--pokemon-yellow);
 }
 
 :root {
@@ -113,6 +123,17 @@
   --type-dark: #705746;
   --type-steel: #b7b7ce;
   --type-fairy: #d685ad;
+
+  --pokemon-black: #2b2b2b;
+  --pokemon-blue: #3f6fa3;
+  --pokemon-brown: #8a6a4a;
+  --pokemon-gray: #8a8a8a;
+  --pokemon-green: #4f8a5a;
+  --pokemon-pink: #c06c84;
+  --pokemon-purple: #7a5c9e;
+  --pokemon-red: #c24b3a;
+  --pokemon-white: #e8e6de;
+  --pokemon-yellow: #d4b84a;
 
   --retro-bg: repeating-linear-gradient(
     0deg,

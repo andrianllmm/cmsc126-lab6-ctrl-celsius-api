@@ -31,6 +31,18 @@ export interface PokemonDetail {
   };
 }
 
+export interface PokemonSpecies {
+  color: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface PokemonWithColor {
+  pokemon: PokemonDetail;
+  color: string;
+}
+
 export type PokemonType =
   | "normal"
   | "fire"
