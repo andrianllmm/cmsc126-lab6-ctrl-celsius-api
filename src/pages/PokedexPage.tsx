@@ -76,7 +76,11 @@ const PokedexPage = () => {
         />
       </div>
 
-      {error && <div>Error: {error}</div>}
+      {error && (
+        <div className="retro text-center m-4 text-destructive">
+          An error occurred
+        </div>
+      )}
 
       {listLoading ? (
         <Loading />
